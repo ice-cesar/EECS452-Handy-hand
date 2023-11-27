@@ -10,6 +10,27 @@ import serial
 import sys
 import time
 
+        # Index image vectors
+        x_idx = np.expand_dims(np.arange(w),0)
+        y_idx = np.expand_dims(np.arange(h),1)
+        print(x_idx.shape, y_idx.shape)
+        print(k, img.shape)
+
+        # TODO: Calculate the center and radius using the index image vectors
+        #       and numpy commands
+        C_x = (x_idx @ img.T) / k
+        C_y = (img.T @ y_idx) / k
+        print(C_x.shape, C_y.shape)
+        C_x = int(np.sum(C_x))
+        C_y = int(np.sum(C_y))
+
+        print(C_x, C_y)
+        center = (C_x, C_y)
+        radius = int(np.sqrt(k/255 / np.pi))
+        print(radius)
+
+
+
 arduino_port = '/dev/ttyACM0'  # Arduino Serial port
 
 # initialize Serial port for Teensy connection
